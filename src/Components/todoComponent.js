@@ -5,7 +5,7 @@ import { faEdit } from "@fortawesome/free-solid-svg-icons";
 function todoComponent() {
   return (
     <li>
-      <p>To buy milk.</p>
+      <a href="">To buy milk.</a>
       <span className="edit">
         {" "}
         <FontAwesomeIcon icon={faEdit} />{" "}
