@@ -1,0 +1,83 @@
+.layout-container {
+  position: relative;
+  width: 400px;
+  height: auto;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+  margin: 0 auto;
+  padding: 1.5rem 0.5rem;
+  background-color: rgb(37, 40, 63);
+  overflow: hidden;
+}
+
+.layout-container::after {
+  position: absolute;
+  content: "";
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  background-color: rgb(70, 72, 103);
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* z-index: ; */
+}
+.layout-container::before {
+  position: absolute;
+  content: "";
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  border: 1px solid rgb(56, 58, 84);
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.layout-container .todo-header {
+  font-size: 20px;
+  position: relative;
+  color: white;
+  z-index: 1;
+}
+.layout-container .todo-header::after {
+  position: absolute;
+  content: "";
+  height: 1px;
+  width: 100%;
+  background: grey;
+  bottom: -5px;
+  left: 0;
+}
+.todos-container {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 1.5rem;
+}
+.layout-container .other-button {
+  width: 80%;
+  display: flex;
+  margin: 0 auto;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+.other-button .btn {
+  border-radius: 5px;
+  padding: 0.5rem 1.2rem;
+  text-decoration: none;
+  transition: 0.2s;
+}
+.btn.create-btn {
+  background-color: rgb(93, 203, 154);
+  color: white;
+}
+.btn.delete-btn {
+  background-color: rgb(225, 53, 53);
+  color: white;
+}
+.other-button .btn:hover {
+  filter: brightness(90%);
+}

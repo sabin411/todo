@@ -1,0 +1,33 @@
+li {
+  display: flex;
+  align-items: center;
+  width: 80%;
+  border-radius: 15px;
+  background-color: rgb(20, 25, 45);
+  margin: 0.5rem 0;
+  color: rgb(240, 240, 240);
+  padding: 0.3rem 0.9rem;
+}
+li a {
+  color: white;
+  text-decoration: none;
+}
+li .edit,
+li .delete {
+  cursor: pointer;
+}
+li .edit:hover,
+li .delete:hover {
+  filter: brightness(130%);
+}
+li .edit {
+  margin-left: auto;
+  margin-right: 1rem;
+  color: rgb(204, 167, 255);
+}
+li .delete {
+  font-size: 22px;
+  transform: scale(1.2, 0.8);
+  color: rgb(225, 53, 53);
+  margin-right: 0.6rem;
+}
