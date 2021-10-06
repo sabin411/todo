@@ -57,6 +57,12 @@
   flex-direction: column;
   margin-top: 1.5rem;
 }
+.todos-container li:nth-of-type(1) {
+  margin-top: 0;
+}
+.todos-container li:last-child {
+  margin-bottom: 0;
+}
 .layout-container .other-button {
   width: 80%;
   display: flex;
