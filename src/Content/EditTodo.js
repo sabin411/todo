@@ -1,8 +1,10 @@
+import React, { useEffect, useState, useRef } from "react";
+import "./EditTodo.css";
+import { useHistory, useParams } from "react-router";
 import axios from "axios";
-import { useHistory } from "react-router";
-import React, { useState, useEffect, useRef } from "react";
-import "./CreateTodos.css";
-function CreateTodos() {
+function EditTodo() {
+  const id = new useParams();
+  const todoInfo = new useParams();
   const refInput = new useRef();
   const refTextArea = new useRef();
   const [inputs, setInputs] = useState({});
@@ -18,16 +20,11 @@ function CreateTodos() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (refInput.current.value && refTextArea.current.value) {
-      axios
-        .post("http://localhost:8000/todos", inputs)
-        .then(() => {
-          refInput.current.value = "";
-          refTextArea.current.value = "";
-          history.push("/");
-        })
-        .catch((err) => {
-          console.log(err.response.data);
-        });
+      axios.put(`http://localhost:8000/todos/${id.id}`, inputs).then(() => {
+        refInput.current.value = "";
+        refTextArea.current.value = "";
+        history.push("/");
+      });
     } else {
       setError("please fill all form");
       setShowError(true);
@@ -42,20 +39,24 @@ function CreateTodos() {
         setShowError(false);
       }, 2000);
     }
-    axios.get("http://localhost:8000/todos").then((resp) => {
-      var lastStoredId = resp.data.slice(-1);
-      console.log(lastStoredId);
-      setInputs({
-        id: lastStoredId.length >= 1 ? lastStoredId[0].id + 1 : 1,
-        [refInput.current.name]: refInput.current.value,
-        [refTextArea.current.name]: refTextArea.current.value,
+    axios(`http://localhost:8000/todos/${id.id}`)
+      .then((resp) => {
+        console.log(resp);
+        refInput.current.value = resp.data.todo;
+        refTextArea.current.value = resp.data.description;
+      })
+      .then(() => {
+        setInputs({
+          ...inputs,
+          [refInput.current.name]: refInput.current.value,
+          [refTextArea.current.name]: refTextArea.current.value,
+        });
       });
-    });
   }, []);
   return (
     <>
       <section>
-        <h1>Create To Do</h1>
+        <h1>Edit Todo</h1>
         <form onSubmit={handleSubmit}>
           <input
             ref={refInput}
@@ -70,12 +71,12 @@ function CreateTodos() {
             onChange={changeHandler}
             placeholder="Description"
           ></textarea>
-          <button className="btn save-btn">Save</button>
+          <button className="btn save-btn">Edit</button>
         </form>
       </section>
-      <div className={`errorBlock ${showError ? "active" : null}`}>{error}</div>
+      <div className={`errorBlock  ${showError ? "active" : ""}`}> {error}</div>
     </>
   );
 }
 
-export default CreateTodos;
+export default EditTodo;

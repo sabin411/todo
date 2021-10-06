@@ -1,0 +1,39 @@
+.details-container h1 {
+  font-size: 24px;
+  color: rgb(235, 235, 235);
+}
+.details-container .details-container-bottom {
+  width: 80%;
+  margin: 0 auto;
+  text-align: left;
+  margin-top: 0.7rem;
+}
+
+.details-container p {
+  color: white;
+  font-size: 0.8em;
+  margin: 0.5rem 0;
+  line-height: 1.1em;
+}
+.details-container p span {
+  font-weight: 800;
+  font-size: 1.2em;
+}
+.details-container p:nth-last-child() {
+  margin-top: 0.5rem;
+}
+.go-back-link {
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 1rem;
+  text-align: right;
+}
+.go-back-link a {
+  display: inline-block;
+  margin-left: auto;
+  color: rgb(93, 203, 154);
+  transition: 0.2s;
+}
+.go-back-link a:hover {
+  filter: brightness(120%);
+}
