@@ -1,0 +1,19 @@
+div {
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+h1 {
+  color: rgb(187, 187, 187);
+}
+h4 {
+  color: rgb(181, 181, 181);
+  margin-top: 1rem;
+}
+p {
+  color: rgb(175, 175, 175);
+  margin-top: 0.8rem;
+}
+p a {
+  color: rgb(93, 203, 154);
+}
