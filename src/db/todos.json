@@ -1,3 +1,14 @@
 {
-  "todos": []
+  "todos": [
+    {
+      "id": 1,
+      "todo": "buy some milk",
+      "description": "something"
+    },
+    {
+      "id": 2,
+      "todo": "buy some sunglasses",
+      "description": "something"
+    }
+  ]
 }

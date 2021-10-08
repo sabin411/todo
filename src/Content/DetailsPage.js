@@ -6,21 +6,26 @@ import axios from "axios";
 const DetailsPage = () => {
   const id = new useParams();
   const [todos, setTodos] = useState({});
-  console.log(id.id);
   useEffect(() => {
-    axios.get(`http://localhost:8000/todos/${id.id}`).then((resp) => {
-      setTodos(resp.data);
+    let stringifiedTodos = localStorage.getItem("todos");
+    let Objtodos = JSON.parse(stringifiedTodos);
+    const filteredTodo = Objtodos.filter((todo) => {
+      return id.id == todo.id;
     });
+    setTodos(filteredTodo[0]);
   }, []);
   return (
     <div className="details-container">
       <h1>Details</h1>
-      <div className="details-container-bottom">
+      <div
+        style={{ textTransform: "capitalize" }}
+        className="details-container-bottom"
+      >
         <p>
-          <span>Todo:</span> {todos.todo}
+          <span>Todo:</span> {todos && todos.todo}
         </p>
         <p>
-          <span>Description:</span> {todos.description}
+          <span>Description:</span> {todos && todos.description}
         </p>
       </div>
       <div className="go-back-link">
