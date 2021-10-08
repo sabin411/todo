@@ -4,7 +4,6 @@ import { useHistory, useParams } from "react-router";
 import axios from "axios";
 function EditTodo() {
   const id = new useParams();
-  const todoInfo = new useParams();
   const refInput = new useRef();
   const refTextArea = new useRef();
   const [inputs, setInputs] = useState({});
@@ -20,10 +19,14 @@ function EditTodo() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (refInput.current.value && refTextArea.current.value) {
-      axios.put(`http://localhost:8000/todos/${id.id}`, inputs).then(() => {
-        refInput.current.value = "";
-        refTextArea.current.value = "";
-        history.push("/");
+      let stringifiedTodos = localStorage.getItem("todos");
+      let Objtodos = JSON.parse(stringifiedTodos);
+      Objtodos.forEach((todo, index) => {
+        if (todo.id == id.id) {
+          Objtodos.splice(index, 1, inputs);
+          localStorage.setItem("todos", JSON.stringify(Objtodos));
+          history.push("/");
+        }
       });
     } else {
       setError("please fill all form");
@@ -39,19 +42,14 @@ function EditTodo() {
         setShowError(false);
       }, 2000);
     }
-    axios(`http://localhost:8000/todos/${id.id}`)
-      .then((resp) => {
-        console.log(resp);
-        refInput.current.value = resp.data.todo;
-        refTextArea.current.value = resp.data.description;
-      })
-      .then(() => {
-        setInputs({
-          ...inputs,
-          [refInput.current.name]: refInput.current.value,
-          [refTextArea.current.name]: refTextArea.current.value,
-        });
-      });
+    let stringifiedTodos = localStorage.getItem("todos");
+    let Objtodos = JSON.parse(stringifiedTodos);
+    const filteredTodo = Objtodos.filter((todo) => {
+      return id.id == todo.id;
+    });
+    refInput.current.value = filteredTodo[0].todo;
+    refTextArea.current.value = filteredTodo[0].description;
+    setInputs(filteredTodo[0]);
   }, []);
   return (
     <>

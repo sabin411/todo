@@ -1,36 +1,34 @@
 import React, { useState, useEffect } from "react";
+import db from "../db/todos.json";
 import "./TodoListComp.js";
 import axios from "axios";
 import TodoComponent from "../Components/todoComponent.js";
 import { Link } from "react-router-dom";
 function TodoListComp() {
   const [todos, setTodos] = useState([]);
+  const initalTodos = [
+    { id: 1, todo: "buy milk", description: "some description will be here" },
+  ];
   useEffect(() => {
-    axios.get(" http://localhost:8000/todos").then((resp) => {
-      setTodos(resp.data);
-    });
+    let stringifiedTodos = localStorage.getItem("todos");
+    setTodos(JSON.parse(stringifiedTodos));
   }, []);
   const deletehandler = (id) => {
-    axios.delete(`http://localhost:8000/todos/${id}`).then(() => {
-      axios.get(" http://localhost:8000/todos").then((resp) => {
-        setTodos(resp.data);
-      });
+    const filteredTodos = todos.filter((todo) => {
+      return todo.id !== id;
     });
+    localStorage.setItem("todos", JSON.stringify(filteredTodos));
+    setTodos(filteredTodos);
   };
   const handleDeleteAll = () => {
-    todos.forEach((todo) => {
-      axios.delete(`http://localhost:8000/todos/${todo.id}`).then(() => {
-        axios.get(" http://localhost:8000/todos").then((resp) => {
-          setTodos(resp.data);
-        });
-      });
-    });
+    setTodos([]);
+    localStorage.setItem("todos", "[]");
   };
   return (
     <>
       <h1 className="todo-header">Todo List</h1>
       <ul className="todos-container">
-        {todos.length ? (
+        {todos.length >= 1 ? (
           todos.map((todo) => {
             return (
               <TodoComponent

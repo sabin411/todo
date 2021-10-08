@@ -14,7 +14,12 @@ function todoComponent({ deletehandler, todoInfo }) {
     <>
       <li className="todos-wrapper">
         <div className="todos-wrapper-content">
-          <Link to={`/view/${todoInfo.id}`}>{todoInfo.todo}</Link>
+          <Link
+            style={{ textTransform: "uppercase" }}
+            to={`/view/${todoInfo.id}`}
+          >
+            {todoInfo.todo}
+          </Link>
           <Link to={`/update/${todoInfo.id}`} className="edit">
             {" "}
             <FontAwesomeIcon icon={faEdit} />{" "}
